@@ -9,10 +9,12 @@ django-storages==1.14.3
 django-summernote==0.8.20.0
 exceptiongroup==1.2.1
 executing==2.0.1
+gunicorn==22.0.0
 ipython==8.18.1
 jedi==0.19.1
 jmespath==1.0.1
 matplotlib-inline==0.1.7
+packaging==24.0
 parso==0.8.4
 pexpect==4.9.0
 prompt_toolkit==3.0.45
