@@ -3,6 +3,15 @@ from .base import *
 
 DEBUG = False
 
+ALLOWED_HOSTS = [
+    'http://info-box.kz',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://info-box.kz',
+]
+
+
 AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
 AWS_STORAGE_BUCKET_NAME = get_env_variable('AWS_STORAGE_BUCKET_NAME')
