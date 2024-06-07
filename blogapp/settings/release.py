@@ -3,10 +3,6 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'http://info-box.kz',
-]
-
 CORS_ALLOWED_ORIGINS = [
     'http://info-box.kz',
 ]
