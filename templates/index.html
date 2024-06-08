@@ -14,6 +14,14 @@
     .card {
         box-shadow: 0 16px 48px #E3E7EB;
     }
+
+    .line-clamp-2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
 </style>
 
 <header class="masthead">
@@ -39,7 +47,7 @@
                     <div class="card-body">
                         <h2 class="card-title">{{ post.title }}</h2>
                         <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_at}} </p>
-                        <div class="card-text">{{post.content | safe | slice:":200"}}</div>
+                        <div class="card-text line-clamp-2">{{post.content | safe }}</div>
                         <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Толығырақ &rarr;</a>
                     </div>
                 </div>
