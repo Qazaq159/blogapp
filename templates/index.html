@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 <style>
-    body {
-        font-family: "Roboto", sans-serif;
-        font-size: 18px;
-        background-color: #fdfdfd;
-    }
-
     .head_text {
         color: white;
     }
@@ -45,7 +39,7 @@
             {% for post in post_list %}
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h2 class="card-title">{{ post.title }}</h2>
+                        <p class="h1 card-title">{{ post.title }}</p>
                         <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_at}} </p>
                         <div class="card-text line-clamp-2">{{post.content | safe }}</div>
                         <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Толығырақ &rarr;</a>
