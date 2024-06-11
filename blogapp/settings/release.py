@@ -7,6 +7,12 @@ CORS_ALLOWED_ORIGINS = [
     'http://info-box.kz',
 ]
 
+SUMMERNOTE_CONFIG = {
+    'attachment_storage_class': 'blog.storages.PublicMediaStorage',
+}
+
+DEFAULT_FILE_STORAGE = 'blog.storages.PublicMediaStorage'
+
 
 AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
