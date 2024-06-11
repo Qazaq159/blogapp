@@ -6,6 +6,7 @@ from blog import views
 
 urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
+    path('search/', views.SearchListView.as_view(), name='search'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
     path('summernote/', include('django_summernote.urls'))
 ]

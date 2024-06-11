@@ -16,6 +16,26 @@
             line-clamp: 2;
         -webkit-box-orient: vertical;
     }
+
+    #search-input {
+        padding: 10px 20px;
+        border: none;
+        width: 50%; /* Adjust width as needed */
+        font-size: 16px; /* Larger text for easier reading */
+        justify-content: left;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007BFF; /* Bootstrap blue for the button */
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
 </style>
 
 <header class="masthead">
@@ -24,9 +44,11 @@
         <div class="row">
             <div class=" col-md-8 col-md-10 mx-auto">
                 <div class="site-heading">
-                    <h3 class=" site-heading my-4 mt-3 text-white"> Info-Box қош келдіңіз! </h3>
-                    <p class="text-light">Ақпарттық танымдық портал &nbsp
-                    </p>
+                        <form action="{% url 'search'  %}" method="get">
+                            <input type="text" name="query" placeholder="Мақала іздеу ..."
+                                   value="{{ request.GET.query }}" id="search-input">
+                            <button type="submit">Іздеу</button>
+                        </form>
                 </div>
             </div>
         </div>
@@ -36,6 +58,7 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-12 mt-3 left">
+        {% if post_list %}
             {% for post in post_list %}
                 <div class="card mb-4">
                     <div class="card-body">
@@ -46,6 +69,9 @@
                     </div>
                 </div>
             {% endfor %}
+        {% else %}
+            <p>Ешнәрсе табылмады</p>
+        {% endif %}
         </div>
 {#        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}#}
     </div>
