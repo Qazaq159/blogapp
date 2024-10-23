@@ -1,6 +1,7 @@
 from django.views import generic
 from django.db.models import Q
 from blog.models import Post
+from django.shortcuts import render
 
 
 class PostList(generic.ListView):
@@ -27,3 +28,6 @@ class SearchListView(generic.ListView):
                 Q(content__contains=query) | Q(title__contains=query)
             )
         return qs.filter(status=Post.STATUS_PUBLISH)
+
+def about(request):
+    return render(request, 'about.html')
