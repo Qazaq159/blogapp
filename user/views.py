@@ -21,8 +21,7 @@ def login_user(request):
                 login(request, user)
                 token, created = Token.objects.get_or_create(user=user)
 
-                response = Response({"message": "Registration successful", "token": token.key},
-                                    status=status.HTTP_201_CREATED)
+                response = redirect('search/')
                 response.set_cookie(
                     key='auth_token',
                     value=token.key,
@@ -53,8 +52,7 @@ def register(request):
             login(request, user)
             token, created = Token.objects.get_or_create(user=user)
 
-            response = Response({"message": "Registration successful", "token": token.key},
-                                status=status.HTTP_201_CREATED)
+            response = redirect('search/')
             response.set_cookie(
                 key='auth_token',
                 value=token.key,
