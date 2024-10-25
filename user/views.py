@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -7,6 +9,8 @@ from django.shortcuts import render, redirect
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import status
+
+
 # Create your views here.
 def login_user(request):
     if request.method == 'POST':
@@ -37,6 +41,8 @@ def login_user(request):
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
+
+
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -63,3 +69,48 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
     return render(request, 'register.html', {'user_form': user_form})
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        # Handle form submission
+        user_data = {
+            'username': request.POST.get('username'),
+            'first_name': request.POST.get('first_name'),
+            'last_name': request.POST.get('last_name'),
+        }
+
+        profile_data = {
+            'location': request.POST.get('location'),
+            'birthdate': request.POST.get('birthdate'),
+            'biography': request.POST.get('biography'),
+        }
+
+        # Update user data
+        for key, value in user_data.items():
+            if value:
+                setattr(request.user, key, value)
+        request.user.save()
+
+        # Update profile data
+        for key, value in profile_data.items():
+            if value:
+                setattr(request.user.profile, key, value)
+
+        # Handle avatar upload
+        if 'avatar' in request.FILES:
+            request.user.profile.avatar = request.FILES['avatar']
+
+        request.user.profile.save()
+        messages.success(request, 'Профиль сәтті жаңартылды!')
+        return redirect('profile')
+
+    return render(request, 'profile.html')
+
+
+@login_required
+def profile_detail(request, username):
+    user = User.objects.get(username=username)
+    return render(request, 'profile_detail.html', {'profile_user': user})
+
