@@ -179,3 +179,6 @@ def delete_comment(request, slug, comment_id):
         messages.error(request, "You do not have permission to delete this comment.")
 
     return redirect('post_detail', slug=slug)
+
+def about(request):
+    return render(request, 'about.html')

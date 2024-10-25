@@ -49,6 +49,7 @@ def register(request):
             response = Response({"message": "Registration successful", "token": token.key},
                                 status=status.HTTP_201_CREATED)
             response = redirect('/')
+
             response.set_cookie(
                 key='auth_token',
                 value=token.key,
