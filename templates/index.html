@@ -13,7 +13,7 @@
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2; /* number of lines to show */
-            line-clamp: 0;
+        line-clamp: 0;
         -webkit-box-orient: vertical;
     }
 
@@ -36,19 +36,33 @@
     button:hover {
         background-color: #0056b3; /* Darker blue on hover */
     }
+
+    .create-post-btn {
+        margin-left: 10px;
+        padding: 10px 20px;
+        background-color: #28a745; /* Green button */
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .create-post-btn:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
 </style>
 
 <header class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class=" col-md-8 col-md-10 mx-auto">
+            <div class="col-md-8 col-md-10 mx-auto">
                 <div class="site-heading">
-                        <form action="{% url 'search'  %}" method="get">
-                            <input type="text" name="query" placeholder="Мақала іздеу ..."
-                                   value="{{ request.GET.query }}" id="search-input">
-                            <button type="submit">Іздеу</button>
-                        </form>
+                    <form action="{% url 'search'  %}" method="get" style="display: flex; align-items: center;">
+                        <input type="text" name="query" placeholder="Мақала іздеу ..."
+                               value="{{ request.GET.query }}" id="search-input">
+                        <button type="submit">Іздеу</button>
+                        <a href="{% url 'post_create' %}" class="create-post-btn">Жаңа мақала қосу</a>
+                    </form>
                 </div>
             </div>
         </div>
@@ -64,7 +78,7 @@
                     <div class="card-body">
                         <p class="h1 card-title">{{ post.title }}</p>
                         <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_at}} </p>
-                        <div class="card-text line-clamp-2">{{post.content | safe }}</div>
+                        <div class="card-text line-clamp-2">{{ post.content | safe }}</div>
                         <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Толығырақ &rarr;</a>
                     </div>
                 </div>
@@ -76,4 +90,4 @@
 {#        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}#}
     </div>
 </div>
-{%endblock%}
+{% endblock %}
